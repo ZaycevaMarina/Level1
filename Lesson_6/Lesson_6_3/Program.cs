@@ -125,7 +125,7 @@ namespace Lesson_6_3
                 }
             }
             foreach(var cource in students_on_cource_by_age)
-                Console.WriteLine($"{cource.Key} {cource.Value}");
+                Console.WriteLine($"Группа №{cource.Key}, количество студентов {cource.Value}");
             return students_on_cource_by_age;
         }
         /// <summary>
@@ -134,9 +134,11 @@ namespace Lesson_6_3
         /// <param name="list_of_students"></param>
         static void PrintList(List<Student> list_of_students)
         {
+            Console.WriteLine($"{"Фамилия",10} {"Имя",10} {"Институт",10} {"Факультет",18} " +
+                                  $"{"Кафедра",25} Курс Возраст Группа {"Город",15}");
             foreach (Student st in list_of_students)
                 Console.WriteLine($"{st.firstName,10} {st.lastName,10} {st.university,10} {st.faculty,18} " +
-                                  $"{st.department,25} {st.course} {st.age} {st.group} {st.city,15}");
+                                  $"{st.department,25} {st.course,4} {st.age,7} {st.group,6} {st.city,15}");
         }
 
         static int CalculateStudents(List<Student> list_of_students, Predicate<Student> condition)
@@ -175,9 +177,9 @@ namespace Lesson_6_3
             PrintList(list_of_students);
             
             //а)
-            Console.WriteLine($"а) Количество студентов учащихся на 5 и 6 курсах: {CalculateStudentsByCourse(list_of_students, 5)}");
+            Console.WriteLine($"\nа) Количество студентов учащихся на 5 и 6 курсах: {CalculateStudentsByCourse(list_of_students, 5)}");
             
-            Console.WriteLine("Для перехода к пункту б) нажмите любую кнопку...");
+            Console.WriteLine("\nДля перехода к пункту б) нажмите любую кнопку...");
             Console.ReadKey();
             Console.Clear();
             
@@ -186,11 +188,11 @@ namespace Lesson_6_3
             CalculateAndPrintStudentsByAge(list_of_students, 18, 20);            
             
             //в)
-            Console.WriteLine("в) Отсортированный список по возрасту студента");
+            Console.WriteLine("\nв) Отсортированный список по возрасту студента");
             list_of_students.Sort(new Comparison<Student>(SortByAge));
             PrintList(list_of_students);
 
-            Console.WriteLine("Для перехода к пункту г) нажмите любую кнопку...");
+            Console.WriteLine("\nДля перехода к пункту г) нажмите любую кнопку...");
             Console.ReadKey();
             Console.Clear();
             
@@ -199,7 +201,8 @@ namespace Lesson_6_3
             list_of_students.Sort(new Comparison<Student>(SortByCourseAndAge));
             PrintList(list_of_students);
 
-            //д) Единый метод подсчета количества студентов по различным параметрам выбора с помощью делегата и методов предикатов
+            //д)
+            Console.WriteLine("\nд) Единый метод подсчета количества студентов по различным параметрам выбора с помощью делегата и методов предикатов");
             Predicate<Student> isMagister = delegate (Student st) { return st.course >= 5; };
             Predicate<Student> isOlder = delegate (Student st) { return st.age >= 24; };
             Predicate<Student> isInGroup = delegate (Student st) { return st.group == 2; };
@@ -207,7 +210,7 @@ namespace Lesson_6_3
             Console.WriteLine($"Количество студентов, 24 и более лет: {CalculateStudents(list_of_students, isOlder)}");
             Console.WriteLine($"Количество студентов в группе №2 {CalculateStudents(list_of_students, isInGroup)}");
 
-            Console.WriteLine("Для завершения нажмите любую кнопку...");
+            Console.WriteLine("\nДля завершения нажмите любую кнопку...");
             Console.ReadKey();
         }
 
